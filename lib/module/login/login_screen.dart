@@ -1,8 +1,8 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app/module/cubit/login_cubit.dart';
-import 'package:shop_app/module/home/home_screen.dart';
 import 'package:shop_app/module/register/register_screen.dart';
 import 'package:shop_app/shared/components/constaints.dart';
 import 'package:shop_app/widgets/custom_button.dart';
@@ -18,7 +18,31 @@ class LoginScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => LoginCubit(),
       child: BlocConsumer<LoginCubit, LoginState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is LoginSuccessState) {
+            if (state.model.status!) {
+             
+              Fluttertoast.showToast(
+                  msg: state.model.message!,
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.CENTER,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.green,
+                  textColor: Colors.white,
+                  fontSize: 16.0);
+            } else {
+              print((state.model.message));
+                 Fluttertoast.showToast(
+                  msg: state.model.message!,
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.CENTER,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0);
+            }
+          }
+        },
         builder: (context, state) {
           return Scaffold(
             body: Padding(
@@ -80,7 +104,7 @@ class LoginScreen extends StatelessWidget {
                           return null;
                         }
                       },
-                      isPassword:LoginCubit.get(context).isPassword ,
+                      isPassword: LoginCubit.get(context).isPassword,
                       suffixPressed: () {
                         LoginCubit.get(context).changePasswordVisibility();
                       },
@@ -119,7 +143,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            navigateTo(context, const RegisterScreen());
+                            navigateTo(context, RegisterScreen());
                           },
                           child: const Text(
                             ' Register',

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/cubit/news_cubit.dart';
 import 'package:shop_app/layout/on_boarding_screen.dart';
-import 'package:shop_app/module/login/login_screen.dart';
 import 'package:shop_app/shared/bloc_observer.dart';
 import 'package:shop_app/shared/network/local/cache_helper.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
@@ -40,7 +39,7 @@ class ShopApp extends StatelessWidget {
             //     ? ThemeMode.dark
             //     : ThemeMode.light,
             ,
-            home: LoginScreen(),
+            home: const OnBoardingScreen(),
           );
         },
       ),
