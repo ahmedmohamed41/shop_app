@@ -18,14 +18,21 @@ void navigateAndFinsh(context, widget) => Navigator.pushAndRemoveUntil(
       ),
      (route) => false,
     );
+// EndPoints: top-headlines - everything - login
+
 // GET https://newsapi.org/v2/top-headlines?country=us&apiKey=fe0764dd1dab457d99ba4899405c6bc8
 
-// base Url: https://newsapi.org/
-// method(url): v2/top-headlines?
-// queries : country=us&apiKey=fe0764dd1dab457d99ba4899405c6bc8
+// base Url:https://newsapi.org/
+// method(url):v2/top-headlines?
+// queries :country=us&apiKey=fe0764dd1dab457d99ba4899405c6bc8
 
 // https://newsapi.org/v2/everything?q=bitcoin&apiKey=fe0764dd1dab457d99ba4899405c6bc8
 
 // base Url: https://newsapi.org/
-// method(url): v2/everything?
+// method(url):v2/everything?
 // queries : q=bitcoin&apiKey=fe0764dd1dab457d99ba4899405c6bc8
+
+
+// https://student.valuxapps.com/api/
+// method(url):login?
+// queries : email=algazzar.abdelrahman@gmail.com&password=123456

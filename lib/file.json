@@ -1,0 +1,14 @@
+{
+    "status":true,
+    "message":"تم تسجيل الدخول بنجاح",
+    "data":{
+        "id":62114,
+        "name":"Ahmed Mohamed",
+        "email":"ahmed.k@gmail.com",
+        "phone":"0125241524",
+        "image":"https://student.valuxapps.com/storage/assets/defaults/user.jpg",
+        "points":0,
+        "credit":0,
+        "token":"iQknqa8yFjOxMrSSbLcjAHMIpTpsuWLV03DNk4gUJvM0O4p7fW1VyVfEtXs1qSqF4zMVQ4"
+    }
+    }
