@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/cubit/news_cubit.dart';
 import 'package:shop_app/layout/on_boarding_screen.dart';
+import 'package:shop_app/module/home/cubit/shop_cubit.dart';
 import 'package:shop_app/module/home/shop_screen.dart';
 import 'package:shop_app/module/login/login_screen.dart';
 import 'package:shop_app/shared/bloc_observer.dart';
+import 'package:shop_app/shared/components/constaints.dart';
 import 'package:shop_app/shared/network/local/cache_helper.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
 import 'package:shop_app/shared/style/theme/theme.dart';
@@ -20,9 +22,9 @@ void main() async {
 
   bool? isDark = CacheHelper.getBoolean(key: 'isDark');
   bool onBoarding = CacheHelper.getDate(key: 'onBoarding');
-  dynamic token = CacheHelper.getDate(key: 'token');
+  token = CacheHelper.getDate(key: 'token');
 
-  if (onBoarding ) {
+  if (onBoarding) {
     if (token != null) {
       widget = const ShopScreen();
     } else {
@@ -43,9 +45,16 @@ class ShopApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ShopCubit()..changeAppMode(fromShared: isDark),
-      child: BlocConsumer<ShopCubit, ShopState>(
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => NewsCubit()..changeAppMode(fromShared: isDark),
+        ),
+        BlocProvider(
+          create: (context) => ShopCubit()..getHomeData(),
+        ),
+      ],
+      child: BlocConsumer<NewsCubit, NewsState>(
         listener: (context, state) {},
         builder: (context, state) {
           return MaterialApp(

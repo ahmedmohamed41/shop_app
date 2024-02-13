@@ -1,14 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/shared/network/local/cache_helper.dart';
 
-
 part 'news_state.dart';
 
-class ShopCubit extends Cubit<ShopState> {
-  ShopCubit() : super(NewsInitialState());
+class NewsCubit extends Cubit<NewsState> {
+  NewsCubit() : super(NewsInitialState());
 
 // create object from NewsCubit
-  static ShopCubit get(context) => BlocProvider.of(context);
+  static NewsCubit get(context) => BlocProvider.of(context);
   // int currentIndex = 0;
   // String url = 'v2/top-headlines';
   // String apiKey = 'fe0764dd1dab457d99ba4899405c6bc8';
@@ -131,6 +130,4 @@ class ShopCubit extends Cubit<ShopState> {
       });
     }
   }
-
-
 }

@@ -33,7 +33,7 @@ Future<bool?> flutterToastShow(LoginSuccessState state, Color color) {
   );
 }
 
-
+String token = '';
 // EndPoints: top-headlines - everything - login
 
 // GET https://newsapi.org/v2/top-headlines?country=us&apiKey=fe0764dd1dab457d99ba4899405c6bc8
