@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/cubit/news_cubit.dart';
 import 'package:shop_app/layout/on_boarding_screen.dart';
+import 'package:shop_app/module/home/shop_screen.dart';
+import 'package:shop_app/module/login/login_screen.dart';
 import 'package:shop_app/shared/bloc_observer.dart';
 import 'package:shop_app/shared/network/local/cache_helper.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
@@ -14,14 +16,29 @@ void main() async {
 
   await CacheHelper.init();
 
-  bool? isDark = CacheHelper.getBoolean(key: 'isDark');
+  Widget widget;
 
-  runApp(ShopApp(isDark));
+  bool? isDark = CacheHelper.getBoolean(key: 'isDark');
+  bool onBoarding = CacheHelper.getDate(key: 'onBoarding');
+  dynamic token = CacheHelper.getDate(key: 'token');
+
+  if (onBoarding ) {
+    if (token != null) {
+      widget = const ShopScreen();
+    } else {
+      widget = LoginScreen();
+    }
+  } else {
+    widget = const OnBoardingScreen();
+  }
+
+  runApp(ShopApp(isDark, widget));
 }
 
 class ShopApp extends StatelessWidget {
   final bool? isDark;
-  const ShopApp(this.isDark, {super.key});
+  final Widget widget;
+  const ShopApp(this.isDark, this.widget, {super.key});
 
   // This widget is the root of your application.
   @override
@@ -39,7 +56,7 @@ class ShopApp extends StatelessWidget {
             //     ? ThemeMode.dark
             //     : ThemeMode.light,
             ,
-            home: const OnBoardingScreen(),
+            home: widget,
           );
         },
       ),
