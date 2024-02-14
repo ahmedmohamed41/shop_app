@@ -28,7 +28,7 @@ class ShopCubit extends Cubit<ShopStates> {
     emit(ShopChangeIndexStates());
   }
 
-  HomeModel? model;
+  HomeModel?  model;
 
   void getHomeData() {
     emit(ShopLoadingStates());
