@@ -90,6 +90,6 @@ class CustomGridViewBuilder extends StatelessWidget {
         ],
       ),
     );
-    ;
+    
   }
 }

@@ -51,7 +51,7 @@ class ShopApp extends StatelessWidget {
           create: (context) => NewsCubit()..changeAppMode(fromShared: isDark),
         ),
         BlocProvider(
-          create: (context) => ShopCubit()..getHomeData(),
+          create: (context) => ShopCubit()..getHomeData()..getCategoriesHomeData(),
         ),
       ],
       child: BlocConsumer<NewsCubit, NewsState>(

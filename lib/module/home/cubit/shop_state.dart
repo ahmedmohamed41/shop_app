@@ -12,3 +12,9 @@ final class ShopLoadingStates extends ShopStates {}
 final class ShopSuccessStates extends ShopStates {}
 
 final class ShopErrorStates extends ShopStates {}
+
+final class ShopLoadingCategoriesStates extends ShopStates {}
+
+final class ShopSuccessCategoriesStates extends ShopStates {}
+
+final class ShopErrorCategoriesStates extends ShopStates {}
