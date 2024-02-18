@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/module/home/cubit/shop_cubit.dart';
 import 'package:shop_app/widgets/custom_build_cate_item.dart';
-import 'package:shop_app/widgets/custom_build_category_item.dart';
 import 'package:shop_app/widgets/custom_separator.dart';
 
 class CategoeiesScreen extends StatelessWidget {
@@ -18,6 +17,7 @@ class CategoeiesScreen extends StatelessWidget {
           child: ListView.separated(
             physics: const BouncingScrollPhysics(),
             itemBuilder: (context, index) => CustomBuildCateItem(
+              
                 categoriesModel:
                     ShopCubit.get(context).categoriesModel!.data!.data[index]),
             separatorBuilder: (context, index) => const CustomMyDivider(),

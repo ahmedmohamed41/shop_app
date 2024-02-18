@@ -3,7 +3,7 @@ import 'package:shop_app/model/categories_model.dart';
 
 class CustomBuildCategoryItem extends StatelessWidget {
   const CustomBuildCategoryItem({super.key, required this.categoriesModel});
-  final DataModel categoriesModel;
+  final DataModel1 categoriesModel;
 
   @override
   Widget build(BuildContext context) {

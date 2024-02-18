@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:shop_app/shared/components/constaints.dart';
 
 ThemeData lightTheme = ThemeData(
-  
   appBarTheme: const AppBarTheme(
     elevation: 0.0,
     backgroundColor: Colors.white,
@@ -12,8 +11,6 @@ ThemeData lightTheme = ThemeData(
       fontSize: 15,
       fontWeight: FontWeight.bold,
     ),
-    
-    shadowColor: Colors.amber,
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarColor: Colors.white,
       statusBarIconBrightness: Brightness.dark,

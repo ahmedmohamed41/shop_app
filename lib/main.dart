@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_app/layout/cubit/news_cubit.dart';
+import 'package:shop_app/layout/cubit/on_boarding_cubit.dart';
 import 'package:shop_app/layout/on_boarding_screen.dart';
 import 'package:shop_app/module/home/cubit/shop_cubit.dart';
 import 'package:shop_app/module/home/shop_screen.dart';
@@ -15,15 +15,12 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
   DioHelper.init();
-
   await CacheHelper.init();
-
   Widget widget;
-
   bool? isDark = CacheHelper.getBoolean(key: 'isDark');
   bool onBoarding = CacheHelper.getDate(key: 'onBoarding');
   token = CacheHelper.getDate(key: 'token');
-
+  print(token);
   if (onBoarding) {
     if (token != null) {
       widget = const ShopScreen();
@@ -48,13 +45,18 @@ class ShopApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => NewsCubit()..changeAppMode(fromShared: isDark),
+          create: (context) =>
+              OnBoardingCubit()..changeAppMode(fromShared: isDark),
         ),
         BlocProvider(
-          create: (context) => ShopCubit()..getHomeData()..getCategoriesHomeData(),
+          create: (context) => ShopCubit()
+            ..getHomeData()
+            ..getCategoriesHomeData()
+            ..getFavorite()
+            ..getUserData(),
         ),
       ],
-      child: BlocConsumer<NewsCubit, NewsState>(
+      child: BlocConsumer<OnBoardingCubit, OnBoardingState>(
         listener: (context, state) {},
         builder: (context, state) {
           return MaterialApp(

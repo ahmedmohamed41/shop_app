@@ -11,25 +11,25 @@ class ShopCategoriesModel {
 
 class CategoriesDataModel {
   int? currentPage;
-  List<DataModel> data = [];
+  List<DataModel1> data = [];
 
   CategoriesDataModel.fromJson(Map<String, dynamic> json) {
     currentPage = json['current_page'];
 
     json['data'].forEach((element) {
-      data.add(DataModel.fromJsom(element),
-    
+      data.add(
+        DataModel1.fromJsom(element),
       );
     });
   }
 }
 
-class DataModel {
+class DataModel1 {
   int? id;
   String? name;
   String? image;
 
-  DataModel.fromJsom(Map<String, dynamic> json) {
+  DataModel1.fromJsom(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     image = json['image'];

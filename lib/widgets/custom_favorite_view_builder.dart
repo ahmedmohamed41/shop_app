@@ -1,31 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/model/home_model.dart';
+import 'package:shop_app/model/favorite_model.dart';
 import 'package:shop_app/module/home/cubit/shop_cubit.dart';
 import 'package:shop_app/shared/components/constaints.dart';
 
-class CustomGridViewBuilder extends StatelessWidget {
-  const CustomGridViewBuilder(this.model, {super.key});
-  final ProductModel model;
-  
+class CustomFavoriteViewBuilder extends StatelessWidget {
+  const CustomFavoriteViewBuilder({super.key, required this.model});
+  final DataModel model;
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      child: Column(
+      width: double.infinity,
+      height: 150,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Stack(
-            alignment: AlignmentDirectional.topStart,
+            alignment: AlignmentDirectional.bottomStart,
             children: [
-              Center(
+              SizedBox(
+                width: 130,
+                height: 150,
                 child: Image(
-                  image: NetworkImage('${model.image}'),
-                  height: 120,
-                  // width: double.infinity,
-                  // fit: BoxFit.cover,
+                  image: NetworkImage(
+                    '${model.product!.image}',
+                  ),
                 ),
               ),
-              if (model.discount != 0)
+              if (model.product!.discount != 0)
                 Container(
                   height: 15,
                   width: 55,
@@ -39,27 +42,23 @@ class CustomGridViewBuilder extends StatelessWidget {
                 )
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.all(12),
+          const SizedBox(
+            width: 10,
+          ),
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${model.name}',
+                  '${model.product!.name}',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold,
-                  ),
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
+                const Spacer(),
                 Row(
                   children: [
                     Text(
-                      '${model.price}',
+                      '${model.product!.price}',
                       style: const TextStyle(
                         fontSize: 10,
                         color: defaultColor,
@@ -68,9 +67,9 @@ class CustomGridViewBuilder extends StatelessWidget {
                     const SizedBox(
                       width: 5,
                     ),
-                    if (model.discount != 0)
+                    if (model.product!.discount != 0)
                       Text(
-                        '${model.oldPrice}',
+                        '${model.product!.oldPrice}',
                         style: const TextStyle(
                           fontSize: 8,
                           color: Colors.grey,
@@ -80,13 +79,13 @@ class CustomGridViewBuilder extends StatelessWidget {
                     CircleAvatar(
                       radius: 20,
                       backgroundColor:
-                          ShopCubit.get(context).favorites[model.id]!
+                          ShopCubit.get(context).favorites[model.product!.id]!
                               ? defaultColor
                               : Colors.grey,
                       child: IconButton(
                         onPressed: () {
-                          ShopCubit.get(context).changeFavorites(model.id!);
-                         
+                          ShopCubit.get(context)
+                              .changeFavorites(model.product!.id!);
                         },
                         icon: const Icon(
                           Icons.favorite_border,
@@ -99,7 +98,7 @@ class CustomGridViewBuilder extends StatelessWidget {
                 )
               ],
             ),
-          )
+          ),
         ],
       ),
     );

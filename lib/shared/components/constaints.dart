@@ -4,7 +4,7 @@ import 'package:shop_app/module/cubit/login_cubit.dart';
 
 const Color kAppbarColor = Colors.blue;
 const Color kModeDarkColor = Color(0xFF2F3635);
-const Color defaultColor = Colors.deepOrange;
+const Color defaultColor = Colors.blue;
 
 void navigateTo(context, widget) => Navigator.push(
       context,

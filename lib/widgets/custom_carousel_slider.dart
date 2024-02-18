@@ -13,15 +13,14 @@ class CustomCarouselSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
-      items: model!.data!.banners
-          .map(
-            (e) => Image(
-              image: NetworkImage('${e.image}'),
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
-          )
-          .toList(),
+      items: model!.data!.banners.map((e) {
+        return Image(
+          
+          image: NetworkImage('${e.image }'),
+          width: double.infinity,
+          fit: BoxFit.cover,
+        );
+      }).toList(),
       options: CarouselOptions(
         height: 180,
         enableInfiniteScroll: true,
@@ -37,3 +36,4 @@ class CustomCarouselSlider extends StatelessWidget {
     );
   }
 }
+

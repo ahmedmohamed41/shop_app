@@ -28,7 +28,7 @@ class CustomMyDivider extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: Container(
-        width: double.infinity,
+        width: 150,
         height: 0.3,
         color: Colors.grey,
       ),
