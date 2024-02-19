@@ -31,9 +31,19 @@ final class ShopErrorGetFavoritesStates extends ShopStates {}
 final class ShopLoadingGetSettingsStates extends ShopStates {}
 
 final class ShopSuccessGetSettingsStates extends ShopStates {
-  final ShopSettingsModel loginModel;
+  final ShopLoginModel loginModel;
 
   ShopSuccessGetSettingsStates(this.loginModel);
 }
 
 final class ShopErrorGetSettingsStates extends ShopStates {}
+
+final class ShopLoadingGetUpdatesStates extends ShopStates {}
+
+final class ShopSuccessGetUpdatesStates extends ShopStates {
+  final ShopLoginModel updateModel;
+
+  ShopSuccessGetUpdatesStates(this.updateModel);
+}
+
+final class ShopErrorGetUpdatesStates extends ShopStates {}

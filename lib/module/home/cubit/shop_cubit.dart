@@ -21,10 +21,10 @@ class ShopCubit extends Cubit<ShopStates> {
 
   static ShopCubit get(context) => BlocProvider.of(context);
   int currentIndex = 0;
-  List<Widget> listScreen = const [
-    HomeScreen(),
-    CategoeiesScreen(),
-    FavoritesScreen(),
+  List<Widget> listScreen = [
+    const HomeScreen(),
+    const CategoeiesScreen(),
+    const FavoritesScreen(),
     SettingsScreeen(),
   ];
   void changeIndex(int index) {
@@ -112,22 +112,53 @@ class ShopCubit extends Cubit<ShopStates> {
     });
   }
 
-  ShopSettingsModel? userSettingDataModel;
+  ShopLoginModel? userSettingDataModel;
 
   void getUserData() {
     emit(ShopLoadingGetSettingsStates());
     DioHelper.getData(
       url: getProfile,
       token: token,
-       
     ).then((value) {
-      userSettingDataModel = ShopSettingsModel.fromJson(value.data);
+      userSettingDataModel = ShopLoginModel.fromJson(value.data);
+      print('before update');
       print(userSettingDataModel!.data!.name);
-      
+      print(userSettingDataModel!.data!.phone);
+      print(userSettingDataModel!.data!.email);
+
       emit(ShopSuccessGetSettingsStates(userSettingDataModel!));
     }).catchError((error) {
       print(error.toString());
       emit(ShopErrorGetSettingsStates());
+    });
+  }
+
+  void updateUserData({
+    required String name,
+    required String phone,
+    required String email,
+  }) {
+    emit(ShopLoadingGetUpdatesStates());
+    DioHelper.putData(
+      data: {
+        'name': name,
+        'phone': phone,
+        'email': email,
+      },
+      url: updateProfile,
+      token: token,
+    ).then((value) {
+      userSettingDataModel = ShopLoginModel.fromJson(value.data);
+      print('after update');
+
+      print(userSettingDataModel!.data!.name);
+      print(userSettingDataModel!.data!.phone);
+      print(userSettingDataModel!.data!.email);
+
+      emit(ShopSuccessGetUpdatesStates(userSettingDataModel!));
+    }).catchError((error) {
+      print(error.toString());
+      emit(ShopErrorGetUpdatesStates());
     });
   }
 }
