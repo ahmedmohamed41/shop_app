@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:shop_app/module/cubit/login_cubit.dart';
+import 'package:shop_app/module/login/cubit/login_cubit.dart';
 
 const Color kAppbarColor = Colors.blue;
 const Color kModeDarkColor = Color(0xFF2F3635);
@@ -21,7 +21,7 @@ void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
       (route) => false,
     );
 
-Future<bool?> flutterToastShow(LoginSuccessState state, Color color) {
+Future<bool?> flutterToastShow( state, Color color) {
   return Fluttertoast.showToast(
     msg: state.model.message!,
     toastLength: Toast.LENGTH_SHORT,

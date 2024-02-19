@@ -112,18 +112,19 @@ class ShopCubit extends Cubit<ShopStates> {
     });
   }
 
-  ShopLoginModel? userDataModel;
+  ShopSettingsModel? userSettingDataModel;
 
   void getUserData() {
     emit(ShopLoadingGetSettingsStates());
     DioHelper.getData(
       url: getProfile,
       token: token,
+       
     ).then((value) {
-      userDataModel = ShopLoginModel.fromJson(value.data);
-      print(userDataModel!.data!.name);
-      print(userDataModel!.data!.phone);
-      emit(ShopSuccessGetSettingsStates());
+      userSettingDataModel = ShopSettingsModel.fromJson(value.data);
+      print(userSettingDataModel!.data!.name);
+      
+      emit(ShopSuccessGetSettingsStates(userSettingDataModel!));
     }).catchError((error) {
       print(error.toString());
       emit(ShopErrorGetSettingsStates());

@@ -1,8 +1,8 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_app/module/cubit/login_cubit.dart';
 import 'package:shop_app/module/home/shop_screen.dart';
+import 'package:shop_app/module/login/cubit/login_cubit.dart';
 import 'package:shop_app/module/register/register_screen.dart';
 import 'package:shop_app/shared/components/constaints.dart';
 import 'package:shop_app/shared/network/local/cache_helper.dart';
@@ -22,9 +22,13 @@ class LoginScreen extends StatelessWidget {
         listener: (context, state) {
           if (state is LoginSuccessState) {
             if (state.model.status!) {
-              CacheHelper.saveData(key: 'token', value: state.model.data!.token);
-              flutterToastShow(state, Colors.green);
-              navigateAndFinish(context, const ShopScreen());
+              CacheHelper.saveData(key: 'token', value: state.model.data!.token)
+                  .then((value) {
+                token = state.model.data!.token!;
+                flutterToastShow(state, Colors.green);
+
+                navigateAndFinish(context, const ShopScreen());
+              });
             } else {
               print((state.model.message));
               flutterToastShow(state, Colors.red);

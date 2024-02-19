@@ -6,47 +6,54 @@ import 'package:shop_app/model/shop_login_model.dart';
 import 'package:shop_app/shared/network/endpoints/end_points.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
 
-part 'login_state.dart';
+part 'register_state.dart';
 
-class LoginCubit extends Cubit<LoginState> {
-  LoginCubit() : super(LoginInitialState());
+class RegisterCubit extends Cubit<RegisterState> {
+  RegisterCubit() : super(RegisterInitial());
 
-  // object of Cubit
-  static LoginCubit get(context) => BlocProvider.of(context);
+  static RegisterCubit get(context) => BlocProvider.of(context);
 
-  ShopLoginModel? loginModel;
+  ShopRegisterModel? registerModel;
 
-  void userLogin({
+  void userRegister({
+    required String name,
+    required String phone,
     required String email,
     required String password,
   }) {
-    emit(LoginLoadingState());
+    emit(RegisterLoadingState());
     DioHelper.postData(
-      url: login,
+      url: register,
       data: {
         'email': email,
         'password': password,
+        'name': name,
+        'phone': phone,
       },
     ).then((value) {
       print(value.data);
-      loginModel =ShopLoginModel.fromJson(value.data);
-      emit(LoginSuccessState(loginModel!));
+      registerModel = ShopRegisterModel.fromJson(value.data);
+
+      emit(RegisterSuccessState(registerModel!));
     }).catchError((error) {
       print(error.toString());
-      emit(LoginErrorState());
+      emit(RegisterErrorState());
     });
   }
 
-  IconData suffix = Icons.visibility_outlined;
+IconData suffix = Icons.visibility_outlined;
   bool isPassword = false;
   void changePasswordVisibility() {
     isPassword = !isPassword;
     if (isPassword) {
       suffix = Icons.visibility_off_outlined;
-      emit(LoginChangePasswordVisibilityState());
+      emit(RegisterChangePasswordVisibilityState());
     } else {
       suffix = Icons.visibility_outlined;
-      emit(LoginChangePasswordVisibilityState());
+      emit(RegisterChangePasswordVisibilityState());
     }
   }
+
+  
+
 }

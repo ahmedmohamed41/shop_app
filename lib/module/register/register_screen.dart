@@ -1,32 +1,49 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_app/module/cubit/login_cubit.dart';
+import 'package:shop_app/module/home/shop_screen.dart';
+import 'package:shop_app/module/login/cubit/login_cubit.dart';
+import 'package:shop_app/module/register/cubit/register_cubit.dart';
 import 'package:shop_app/shared/components/constaints.dart';
+import 'package:shop_app/shared/network/local/cache_helper.dart';
 import 'package:shop_app/widgets/custom_button.dart';
 import 'package:shop_app/widgets/custom_text_from_filed.dart';
 
+// ignore: must_be_immutable
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({super.key});
   final formKey = GlobalKey<FormState>();
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+  var nameController = TextEditingController();
+  var phoneController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    var emailController = TextEditingController();
-    var passwordController = TextEditingController();
     return BlocProvider(
-      create: (context) => LoginCubit(),
-      child: BlocConsumer<LoginCubit, LoginState>(
+      create: (context) => RegisterCubit(),
+      child: BlocConsumer<RegisterCubit, RegisterState>(
         listener: (context, state) {},
         builder: (context, state) {
+           if (state is RegisterSuccessState) {
+            if (state.model.status!) {
+              CacheHelper.saveData(key: 'token', value: state.model.data!.token);
+              flutterToastShow(state, Colors.green);
+              navigateAndFinish(context, const ShopScreen());
+            } else {
+              print((state.model.message));
+              flutterToastShow(state, Colors.red);
+            }
+          }
           return Scaffold(
             body: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Form(
                 key: formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
+                child: ListView(
                   children: [
+                    const SizedBox(
+                      height: 110,
+                    ),
                     const Text(
                       'REGISTER',
                       style: TextStyle(
@@ -70,7 +87,7 @@ class RegisterScreen extends StatelessWidget {
                       labelText: 'PassWord',
                       inputType: TextInputType.visiblePassword,
                       prefixIcon: const Icon(Icons.lock_outline),
-                      suffixIcon: LoginCubit.get(context).suffix,
+                      suffixIcon: RegisterCubit.get(context).suffix,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Please enter your password';
@@ -78,20 +95,54 @@ class RegisterScreen extends StatelessWidget {
                           return null;
                         }
                       },
-                      isPassword: LoginCubit.get(context).isPassword,
+                      isPassword: RegisterCubit.get(context).isPassword,
                       suffixPressed: () {
-                        LoginCubit.get(context).changePasswordVisibility();
+                        RegisterCubit.get(context).changePasswordVisibility();
+                      },
+                    ),
+                    const SizedBox(
+                      height: 15.0,
+                    ),
+                    CustomTextFormField(
+                      controller: nameController,
+                      labelText: 'Name',
+                      inputType: TextInputType.name,
+                      prefixIcon: const Icon(Icons.person),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter your name';
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
+                    const SizedBox(
+                      height: 15.0,
+                    ),
+                    CustomTextFormField(
+                      controller: phoneController,
+                      labelText: 'Phone',
+                      inputType: TextInputType.phone,
+                      prefixIcon: const Icon(Icons.phone),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter your phone';
+                        } else {
+                          return null;
+                        }
                       },
                     ),
                     const SizedBox(
                       height: 30.0,
                     ),
                     ConditionalBuilder(
-                      condition: state is! LoginLoadingState,
+                      condition: state is! RegisterLoadingState,
                       builder: (context) => CustomButton(
                         onTap: () {
                           if (formKey.currentState!.validate()) {
-                            LoginCubit.get(context).userLogin(
+                            RegisterCubit.get(context).userRegister(
+                                name: nameController.text,
+                                phone: phoneController.text,
                                 email: emailController.text,
                                 password: passwordController.text);
                           }
