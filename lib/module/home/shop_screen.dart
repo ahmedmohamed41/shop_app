@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/module/home/cubit/shop_cubit.dart';
-import 'package:shop_app/module/home/search_screen.dart';
+import 'package:shop_app/module/search/search_screen.dart';
 import 'package:shop_app/shared/components/constaints.dart';
 
 class ShopScreen extends StatelessWidget {

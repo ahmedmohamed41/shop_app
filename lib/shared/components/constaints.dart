@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:shop_app/module/login/cubit/login_cubit.dart';
 
 const Color kAppbarColor = Colors.blue;
 const Color kModeDarkColor = Color(0xFF2F3635);

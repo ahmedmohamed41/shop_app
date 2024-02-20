@@ -20,7 +20,7 @@ void main() async {
   bool? isDark = CacheHelper.getBoolean(key: 'isDark');
   bool onBoarding = CacheHelper.getDate(key: 'onBoarding');
   token = CacheHelper.getDate(key: 'token') ?? "null";
-  print(token);
+  print('token:$token');
   if (onBoarding) {
     if (token != "null") {
       widget = const ShopScreen();

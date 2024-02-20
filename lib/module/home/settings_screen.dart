@@ -8,7 +8,6 @@ import 'package:shop_app/module/login/login_screen.dart';
 import 'package:shop_app/shared/components/constaints.dart';
 import 'package:shop_app/shared/network/local/cache_helper.dart';
 import 'package:shop_app/widgets/custom_button.dart';
-import 'package:shop_app/widgets/custom_condition_builder.dart';
 import 'package:shop_app/widgets/custom_text_from_filed.dart';
 
 class SettingsScreeen extends StatelessWidget {
@@ -35,6 +34,7 @@ class SettingsScreeen extends StatelessWidget {
               child: ListView(
                 children: [
                   if(state is ShopLoadingGetUpdatesStates)
+                  
                   const LinearProgressIndicator(),
                   const SizedBox(
                     height: 10,
