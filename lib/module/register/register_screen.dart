@@ -24,11 +24,13 @@ class RegisterScreen extends StatelessWidget {
       child: BlocConsumer<RegisterCubit, RegisterState>(
         listener: (context, state) {},
         builder: (context, state) {
-           if (state is RegisterSuccessState) {
+          if (state is RegisterSuccessState) {
             if (state.model.status!) {
-              CacheHelper.saveData(key: 'token', value: state.model.data!.token);
-              flutterToastShow(state, Colors.green);
-              navigateAndFinish(context, const ShopScreen());
+              CacheHelper.saveData(key: 'token', value: state.model.data!.token)
+                  .then((value) {
+                flutterToastShow(state, Colors.green);
+                navigateAndFinish(context, const ShopScreen());
+              });
             } else {
               print((state.model.message));
               flutterToastShow(state, Colors.red);

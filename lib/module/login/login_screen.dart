@@ -28,6 +28,7 @@ class LoginScreen extends StatelessWidget {
                 flutterToastShow(state, Colors.green);
 
                 navigateAndFinish(context, const ShopScreen());
+               
               });
             } else {
               print((state.model.message));

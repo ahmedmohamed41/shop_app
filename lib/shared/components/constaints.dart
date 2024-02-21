@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shop_app/module/home/cubit/shop_cubit.dart';
 
 const Color kAppbarColor = Colors.blue;
 const Color kModeDarkColor = Color(0xFF2F3635);
@@ -23,6 +24,18 @@ void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
 Future<bool?> flutterToastShow( state, Color color) {
   return Fluttertoast.showToast(
     msg: state.model.message!,
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.CENTER,
+    timeInSecForIosWeb: 1,
+    backgroundColor: color,
+    textColor: Colors.white,
+    fontSize: 16.0,
+  );
+}
+
+Future<bool?> flutterToastShowUpdate(ShopSuccessGetUpdatesStates state, Color color) {
+  return Fluttertoast.showToast(
+    msg: state.updateModel.message!,
     toastLength: Toast.LENGTH_SHORT,
     gravity: ToastGravity.CENTER,
     timeInSecForIosWeb: 1,

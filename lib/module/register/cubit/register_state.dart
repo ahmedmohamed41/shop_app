@@ -14,5 +14,6 @@ final class RegisterSuccessState extends RegisterState {
 }
 
 final class RegisterErrorState extends RegisterState {}
+
 final class RegisterChangePasswordVisibilityState extends RegisterState {}
 

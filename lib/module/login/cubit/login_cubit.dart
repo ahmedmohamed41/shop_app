@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:shop_app/model/shop_login_model.dart';
-import 'package:shop_app/module/register/cubit/register_cubit.dart';
 import 'package:shop_app/shared/network/endpoints/end_points.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
 

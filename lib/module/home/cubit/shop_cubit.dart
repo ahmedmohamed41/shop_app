@@ -21,11 +21,15 @@ class ShopCubit extends Cubit<ShopStates> {
 
   static ShopCubit get(context) => BlocProvider.of(context);
   int currentIndex = 0;
+    var formKey = GlobalKey<FormState>();
+  var nameController = TextEditingController();
+  var emailController = TextEditingController();
+  var phoneController = TextEditingController();
   List<Widget> listScreen = [
     const HomeScreen(),
     const CategoeiesScreen(),
     const FavoritesScreen(),
-    SettingsScreeen(),
+    const SettingsScreeen(),
   ];
   void changeIndex(int index) {
     currentIndex = index;
@@ -148,12 +152,10 @@ class ShopCubit extends Cubit<ShopStates> {
       url: updateProfile,
       token: token,
     ).then((value) {
+       print(value.data);
       userSettingDataModel = ShopLoginModel.fromJson(value.data);
       print('after update');
 
-      print(userSettingDataModel!.data!.name);
-      print(userSettingDataModel!.data!.phone);
-      print(userSettingDataModel!.data!.email);
 
       emit(ShopSuccessGetUpdatesStates(userSettingDataModel!));
     }).catchError((error) {

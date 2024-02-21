@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/model/favorite_model.dart';
-import 'package:shop_app/module/home/cubit/shop_cubit.dart';
+import 'package:shop_app/model/search_model.dart';
 import 'package:shop_app/shared/components/constaints.dart';
 
-class CustomFavoriteViewBuilder extends StatelessWidget {
-  const CustomFavoriteViewBuilder({super.key, required this.model});
-  final DataModel model;
+class CustomSearchViewBuilder extends StatelessWidget {
+  const CustomSearchViewBuilder({super.key, required this.model});
+  final ProductModel model;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,11 +23,11 @@ class CustomFavoriteViewBuilder extends StatelessWidget {
                 height: 150,
                 child: Image(
                   image: NetworkImage(
-                    '${model.product!.image}',
+                    '${model.image}',
                   ),
                 ),
               ),
-              if (model.product!.discount != 0)
+              if (model.discount != 0)
                 Container(
                   height: 15,
                   width: 55,
@@ -50,7 +49,7 @@ class CustomFavoriteViewBuilder extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${model.product!.name}',
+                  '${model.name}',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -58,7 +57,7 @@ class CustomFavoriteViewBuilder extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      '${model.product!.price}',
+                      '${model.price}',
                       style: const TextStyle(
                         fontSize: 10,
                         color: defaultColor,
@@ -67,9 +66,9 @@ class CustomFavoriteViewBuilder extends StatelessWidget {
                     const SizedBox(
                       width: 5,
                     ),
-                    if (model.product!.discount != 0)
+                    if (model.discount != 0)
                       Text(
-                        '${model.product!.oldPrice}',
+                        '${model.oldPrice}',
                         style: const TextStyle(
                           fontSize: 8,
                           color: Colors.grey,
@@ -78,15 +77,9 @@ class CustomFavoriteViewBuilder extends StatelessWidget {
                     const Spacer(),
                     CircleAvatar(
                       radius: 20,
-                      backgroundColor:
-                          ShopCubit.get(context).favorites[model.product!.id]!
-                              ? defaultColor
-                              : Colors.grey,
+                      backgroundColor: Colors.grey,
                       child: IconButton(
-                        onPressed: () {
-                          ShopCubit.get(context)
-                              .changeFavorites(model.product!.id!);
-                        },
+                        onPressed: () {},
                         icon: const Icon(
                           Icons.favorite_border,
                           size: 20,
@@ -104,4 +97,3 @@ class CustomFavoriteViewBuilder extends StatelessWidget {
     );
   }
 }
-
